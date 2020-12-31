@@ -17,45 +17,85 @@
     >
       <h1 class="text-3xl font-bold font-sans text-indigo-600">Stopwatch</h1>
 
-      <h2 class="text-xl mt-8 font-bold font-sans text-indigo-600">0:00</h2>
+      <!-- <div class="stopwatch">
+        <span class="time" id="display">00:00:00</span>
+      </div> -->
+
+      <h2 class="text-xl mt-8 font-bold font-sans text-indigo-600 time" id="display">00:00:00</h2>
       <div class="flex mt-12">
         <button
-          class="bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonPlay bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Start
         </button>
         <button
-          class="bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonNext bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Next
         </button>
         <button
-          class="bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonStop hidden bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Stop
         </button>
         <button
-          class="bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonPause bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Pause
         </button>
         <button
-          class="bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonSave bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Save
         </button>
         <button
-          class="bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonReset bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Reset
         </button>
+
+        <button
+        class="buttonShow bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+      >
+        Show saved
+      </button>
       </div>
       <section class="mt-12">
         <h2 class="text-xl font-bold font-sans text-indigo-600">
           Ostatnie wyniki
         </h2>
       </section>
+      <section class="times">
+        <ul class="timesList">
+
+        </ul>
+
+      </section>
+      <section class="listFromStorage">
+        <ul class="timesListFromStorage">
+
+        </ul>
+      </section>
     </main>
     <script src="./script.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCWaWwrqIBdeuKjWT8qgr05n_XAx2TqO-o",
+    authDomain: "fir-ex-a5082.firebaseapp.com",
+    projectId: "fir-ex-a5082",
+    storageBucket: "fir-ex-a5082.appspot.com",
+    messagingSenderId: "738122474190",
+    appId: "1:738122474190:web:c744e8f522b8ef0a20669f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
   </body>
 </html>
