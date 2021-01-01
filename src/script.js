@@ -48,16 +48,19 @@ function reset(){
     stopClicked = false;
     pauseClicked = false;
     playBtn.disabled = false;
+    nextBtn.disabled = true;
+    pauseBtn.disabled = true;
     stopBtn.classList.add("hidden");
 }
 
-// window.localStorage.getItem('First person');
-
 //PLAY
+let playClicked;
 
 playBtn.addEventListener("click", () => {
+    nextBtn.disabled = false;
     playBtn.disabled = true;
     stopBtn.disabled = false;
+    pauseBtn.disabled = false;
  
     stopBtn.classList.remove("hidden");
     
@@ -80,12 +83,13 @@ stopClicked = false;
 stopBtn.addEventListener("click",  function stop() {
     stopBtn.classList.add("hidden");
     clearInterval(play);
-    
+    pauseBtn.disabled = true;
     stopClicked = true;
 playBtn.disabled=false;})
 
 //PAUSE
 let pauseClicked = false;
+pauseBtn.disabled = true;
 
 pauseBtn.addEventListener("click",  () => {   
 
@@ -155,37 +159,43 @@ showSaved.addEventListener("click", () => {
     let placeForTimesFromStorage = document.querySelector(".listFromStorage");
     let tableOfStoredValues = [];
     let names = [];
-    let counter = 0;
-    
-    for(var i =0; i < localStorage.length; i++){
+    // let counter = 0;
+
+    for (var i = 0; i < localStorage.length; i++) {
 
         let keyNames = window.localStorage.key(i);
         let elem = window.localStorage.key(i) + localStorage.getItem(localStorage.key(i));
-// let tableOfStoredValues = table.sort();
-names.push(keyNames);
+        let results = JSON.parse(localStorage.getItem(localStorage.key(i)))
+        names.push(keyNames);
 
-console.log(names);
-    let p = document.createElement("p");
-let html = `<p>${counter}. ${names[i]}</p>`;
-p.innerHTML = html;
-placeForTimesFromStorage.appendChild(p);
+        let p = document.createElement("p");
+        let html = `<p class="btn arrow_down">${window.localStorage.key(i)}</p>
+<ul class="hidden">${results.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        p.innerHTML = html;
+        placeForTimesFromStorage.appendChild(p);
 
-
-tableOfStoredValues.push(elem);
-
-
+        tableOfStoredValues.push(elem);
     }
+    const toggleBtn = document.querySelectorAll(".btn");
+    toggleBtn.forEach((elem) => {
+        const toggleBtnSibling = elem.nextElementSibling;
+        elem.addEventListener("click", () => {
+            toggleBtnSibling.classList.toggle("hidden");
+            elem.classList.toggle("arrow_down");
+            elem.classList.toggle("arrow_up");
+        })
+    })
 
-tableOfStoredValues.filter((elem) =>{
-})
+    tableOfStoredValues.filter((elem) => {
+    })
 
-    console.log(tableOfStoredValues);
-console.log(names); 
+    console.log("stored" + tableOfStoredValues);
 })
 
 ///NEXT - SAVE AND SHOW CURRENT RESULT AND CONTINUE GOING
 let placeForTimes = document.querySelector(".times");
 let counter = 0;
+nextBtn.disabled = true;
 
 nextBtn.addEventListener("click", () => {
     counter = counter + 1;
