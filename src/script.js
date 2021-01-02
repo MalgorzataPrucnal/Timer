@@ -150,10 +150,10 @@ saveBtn.addEventListener("click", () => {
 
         stopClicked = false;
         window.localStorage.setItem(keyName, JSON.stringify(newArr[indexTobeChanged]));
-        firebase.firestore().collection("times").add({
-            nameSaved: keyName,
-            timesSaved: JSON.stringify(newArr[indexTobeChanged])
-            })
+        // firebase.firestore().collection("times").add({
+        //     nameSaved: keyName,
+        //     timesSaved: JSON.stringify(newArr[indexTobeChanged])
+        //     })
     }
     else {
         alert("Stop the timer to save the result.")
