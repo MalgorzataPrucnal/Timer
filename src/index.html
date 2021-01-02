@@ -44,7 +44,7 @@
           Pause
         </button>
         <button
-          class="buttonSave bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+          class="buttonSave hidden bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
         >
           Save
         </button>
@@ -59,11 +59,16 @@
       >
         Show saved
       </button>
+      <button
+      class="buttonFirebase hidden bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
+    >
+      Send to database
+    </button>
       </div>
       <section class="mt-12">
         <div>
         <h2 class="text-xl font-bold font-sans text-indigo-600">
-          Ostatnie wyniki
+          Last results
         </h2>
         <section class="times">
           <ul class="timesList">
@@ -72,7 +77,7 @@
       </div>
       <div>
         <h2 class="text-xl font-bold font-sans text-indigo-600">
-          Zapisane wyniki
+          Saved results
         </h2>
       
       <section class="listFromStorage">
@@ -83,17 +88,11 @@
   </section>
       </main>
 
-    <script src="./script.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="firebase.config.js"></script>
+<script src="script.js"></script>
 
-<script>
-
-  // Initialize Firebase
-  // firebase.initializeApp(firebaseConfig);
-</script>
   </body>
 </html>

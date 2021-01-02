@@ -1,3 +1,5 @@
+firebase.initializeApp(firebaseConfig);
+
 const placeForTime = document.querySelector(".time");
 const playBtn = document.querySelector(".buttonPlay");
 const pauseBtn = document.querySelector(".buttonPause");
@@ -6,6 +8,8 @@ const resetBtn = document.querySelector(".buttonReset");
 const saveBtn = document.querySelector(".buttonSave");
 const nextBtn = document.querySelector(".buttonNext");
 const showSaved = document.querySelector(".buttonShow");
+const sendFirebase = document.querySelector(".buttonFirebase")
+
 
 let play;
 let timeZero;
@@ -63,7 +67,7 @@ playBtn.addEventListener("click", () => {
     playBtn.disabled = true;
     stopBtn.disabled = false;
     pauseBtn.disabled = false;
- 
+    saveBtn.classList.add("hidden");
     stopBtn.classList.remove("hidden");
     
     if (pauseClicked === true)
@@ -84,6 +88,7 @@ playBtn.addEventListener("click", () => {
 stopClicked = false;
 stopBtn.addEventListener("click",  function stop() {
     stopBtn.classList.add("hidden");
+    saveBtn.classList.remove("hidden");
     clearInterval(play);
     pauseBtn.disabled = true;
     stopClicked = true;
@@ -92,6 +97,8 @@ playBtn.disabled=false;})
 //PAUSE
 let pauseClicked = false;
 pauseBtn.disabled = true;
+
+saveBtn.classList.add("hidden");
 
 pauseBtn.addEventListener("click",  () => {   
 
@@ -114,10 +121,11 @@ let keyNamesStorage = [];
 let emptyRows = [[], [], [], [], [], [], [], [], [], []];
 
 saveBtn.addEventListener("click", () => {
+    saveBtn.classList.add("hidden");
     if (stopClicked === true) {
         
-        let keyName = prompt("Give the name");
-        if(keyName == false) {keyName = "Anonymous"};
+        let keyName = prompt("Enter a name");
+        if(keyName == false || keyName == null) {keyName = "Anonymous"};
         keyNamesStorage.push(keyName);
         reset();
 
@@ -153,15 +161,18 @@ saveBtn.addEventListener("click", () => {
 });
 
 //SAVE IN FIREBASE
+// sendFirebase.addEventListener ("click", () => {
+
 // firebase.firestore().collection("times").add({
 // nameSaved: keyName,
 // timesSaved: JSON.stringify(newArr[indexTobeChanged])
 // })
+// })
+
+
+//SHOW RESULTS SAVED IN LOCAL STORAGE
 let showClicked = false;
 
-
-let html;
-//SHOW RESULTS SAVED IN LOCAL STORAGE
 showSaved.addEventListener("click", () => {
     let placeForTimesFromStorage = document.querySelector(".listFromStorage");
     let tableOfStoredValues = [];
@@ -197,7 +208,7 @@ showSaved.addEventListener("click", () => {
         console.log("stored" + tableOfStoredValues);
 }})
 
-///NEXT - SAVE AND SHOW CURRENT RESULT AND CONTINUE GOING
+///NEXT - SHOW CURRENT RESULT AND CONTINUE GOING
 let placeForTimes = document.querySelector(".times");
 let counter = 0;
 nextBtn.disabled = true;
