@@ -1,4 +1,4 @@
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
 const placeForTime = document.querySelector(".time");
 const playBtn = document.querySelector(".buttonPlay");
