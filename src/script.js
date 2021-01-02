@@ -50,7 +50,9 @@ function reset(){
     playBtn.disabled = false;
     nextBtn.disabled = true;
     pauseBtn.disabled = true;
+    showClicked = false;
     stopBtn.classList.add("hidden");
+    document.querySelector(".listFromStorage").innerHTML = "";
 }
 
 //PLAY
@@ -113,7 +115,9 @@ let emptyRows = [[], [], [], [], [], [], [], [], [], []];
 
 saveBtn.addEventListener("click", () => {
     if (stopClicked === true) {
+        
         let keyName = prompt("Give the name");
+        if(keyName == false) {keyName = "Anonymous"};
         keyNamesStorage.push(keyName);
         reset();
 
@@ -153,44 +157,45 @@ saveBtn.addEventListener("click", () => {
 // nameSaved: keyName,
 // timesSaved: JSON.stringify(newArr[indexTobeChanged])
 // })
+let showClicked = false;
 
+
+let html;
 //SHOW RESULTS SAVED IN LOCAL STORAGE
 showSaved.addEventListener("click", () => {
     let placeForTimesFromStorage = document.querySelector(".listFromStorage");
     let tableOfStoredValues = [];
     let names = [];
     // let counter = 0;
+    if (showClicked === false) {
+        for (var i = 0; i < localStorage.length; i++) {
 
-    for (var i = 0; i < localStorage.length; i++) {
+            let keyNames = window.localStorage.key(i);
+            let elem = window.localStorage.key(i) + localStorage.getItem(localStorage.key(i));
+            let results = JSON.parse(localStorage.getItem(localStorage.key(i)))
+            names.push(keyNames);
 
-        let keyNames = window.localStorage.key(i);
-        let elem = window.localStorage.key(i) + localStorage.getItem(localStorage.key(i));
-        let results = JSON.parse(localStorage.getItem(localStorage.key(i)))
-        names.push(keyNames);
+            let p = document.createElement("p");
 
-        let p = document.createElement("p");
-        let html = `<p class="btn arrow_down">${window.localStorage.key(i)}</p>
+            html = `<p class="btn arrow_down">${window.localStorage.key(i)}</p>
 <ul class="hidden">${results.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        p.innerHTML = html;
-        placeForTimesFromStorage.appendChild(p);
+            p.innerHTML = html;
+            placeForTimesFromStorage.appendChild(p);
 
-        tableOfStoredValues.push(elem);
-    }
-    const toggleBtn = document.querySelectorAll(".btn");
-    toggleBtn.forEach((elem) => {
-        const toggleBtnSibling = elem.nextElementSibling;
-        elem.addEventListener("click", () => {
-            toggleBtnSibling.classList.toggle("hidden");
-            elem.classList.toggle("arrow_down");
-            elem.classList.toggle("arrow_up");
+            tableOfStoredValues.push(elem);
+        }
+        const toggleBtn = document.querySelectorAll(".btn");
+        toggleBtn.forEach((elem) => {
+            const toggleBtnSibling = elem.nextElementSibling;
+            elem.addEventListener("click", () => {
+                toggleBtnSibling.classList.toggle("hidden");
+                elem.classList.toggle("arrow_down");
+                elem.classList.toggle("arrow_up");
+            })
         })
-    })
-
-    tableOfStoredValues.filter((elem) => {
-    })
-
-    console.log("stored" + tableOfStoredValues);
-})
+        showClicked = true;
+        console.log("stored" + tableOfStoredValues);
+}})
 
 ///NEXT - SAVE AND SHOW CURRENT RESULT AND CONTINUE GOING
 let placeForTimes = document.querySelector(".times");
@@ -199,10 +204,10 @@ nextBtn.disabled = true;
 
 nextBtn.addEventListener("click", () => {
     counter = counter + 1;
-    let p = document.createElement("p");
+    let par = document.createElement("p");
     let html = `<p>${counter}. ${newTime}</p>`;
-    p.innerHTML = html;
-    placeForTimes.appendChild(p);
+    par.innerHTML = html;
+    placeForTimes.appendChild(par);
 }
 )
 
