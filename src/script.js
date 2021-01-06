@@ -49,6 +49,7 @@ function reset(){
     timePassed = 0;
     counter = 0;
     placeForTimes.innerHTML = ``;
+    nextBtn.disabled = true;
     stopClicked = false;
     pauseClicked = false;
     playBtn.disabled = false;
@@ -92,6 +93,7 @@ stopBtn.addEventListener("click",  function stop() {
     clearInterval(play);
     pauseBtn.disabled = true;
     stopClicked = true;
+    nextBtn.disabled = true;
 playBtn.disabled=false;})
 
 //PAUSE
@@ -103,11 +105,13 @@ saveBtn.classList.add("hidden");
 pauseBtn.addEventListener("click",  () => {   
 
     if (pauseClicked === false){
+        nextBtn.disabled = true;
         clearInterval(play);
         pauseClicked = true;
         
 }
 else if (pauseClicked === true) {
+    nextBtn.disabled = false;
     playWithouthReset();
     pauseClicked = false;
     
@@ -150,17 +154,19 @@ saveBtn.addEventListener("click", () => {
 
         stopClicked = false;
         window.localStorage.setItem(keyName, JSON.stringify(newArr[indexTobeChanged]));
-        // firebase.firestore().collection("times").add({
-        //     nameSaved: keyName,
-        //     timesSaved: JSON.stringify(newArr[indexTobeChanged])
-        //     })
+
+    //THESE THREE LINES SAVE RESULTS IN FIREBASE
+    //     firebase.firestore().collection("times").add({
+    //         nameSaved: keyName,
+    //         timesSaved: JSON.stringify(newArr[indexTobeChanged])
+    //         })
     }
     else {
         alert("Stop the timer to save the result.")
     }
 });
 
-//SAVE IN FIREBASE
+// SAVE IN FIREBASE
 // sendFirebase.addEventListener ("click", () => {
 
 // firebase.firestore().collection("times").add({
