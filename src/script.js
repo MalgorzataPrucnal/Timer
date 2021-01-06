@@ -57,6 +57,7 @@ function reset(){
     pauseBtn.disabled = true;
     showClicked = false;
     stopBtn.classList.add("hidden");
+    saveBtn.classList.add("hidden");
     document.querySelector(".listFromStorage").innerHTML = "";
 }
 
@@ -94,7 +95,8 @@ stopBtn.addEventListener("click",  function stop() {
     pauseBtn.disabled = true;
     stopClicked = true;
     nextBtn.disabled = true;
-playBtn.disabled=false;})
+    playBtn.disabled=false;
+})
 
 //PAUSE
 let pauseClicked = false;
