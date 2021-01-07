@@ -1,4 +1,4 @@
-// firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 const placeForTime = document.querySelector(".time");
 const playBtn = document.querySelector(".buttonPlay");
@@ -8,7 +8,7 @@ const resetBtn = document.querySelector(".buttonReset");
 const saveBtn = document.querySelector(".buttonSave");
 const nextBtn = document.querySelector(".buttonNext");
 const showSaved = document.querySelector(".buttonShow");
-const sendFirebase = document.querySelector(".buttonFirebase")
+const firebaseBtn = document.querySelector(".firebase")
 
 
 let play;
@@ -157,19 +157,19 @@ saveBtn.addEventListener("click", () => {
         stopClicked = false;
         window.localStorage.setItem(keyName, JSON.stringify(newArr[indexTobeChanged]));
 
-    //THESE THREE LINES SAVE RESULTS IN FIREBASE
-    //     firebase.firestore().collection("times").add({
-    //         nameSaved: keyName,
-    //         timesSaved: JSON.stringify(newArr[indexTobeChanged])
-    //         })
+    //SAVE RESULTS IN FIREBASE (TOGETHER WITH LOCAL STORAGE)
+        firebase.firestore().collection("times").add({
+            nameSaved: keyName,
+            timesSaved: JSON.stringify(newArr[indexTobeChanged])
+            })
     }
     else {
         alert("Stop the timer to save the result.")
     }
 });
 
-// SAVE IN FIREBASE
-// sendFirebase.addEventListener ("click", () => {
+// SAVE IN FIREBASE - SEPARATE BUTTON
+// firebaseBtn.addEventListener ("click", () => {
 
 // firebase.firestore().collection("times").add({
 // nameSaved: keyName,
@@ -182,6 +182,7 @@ saveBtn.addEventListener("click", () => {
 let showClicked = false;
 
 showSaved.addEventListener("click", () => {
+    // firebaseBtn.classList.remove("hidden");
     let placeForTimesFromStorage = document.querySelector(".listFromStorage");
     let tableOfStoredValues = [];
     let names = [];
@@ -213,7 +214,7 @@ showSaved.addEventListener("click", () => {
             })
         })
         showClicked = true;
-        console.log("stored" + tableOfStoredValues);
+        console.log(typeof(tableOfStoredValues) + tableOfStoredValues);
 }})
 
 ///NEXT - SHOW CURRENT RESULT AND CONTINUE GOING
