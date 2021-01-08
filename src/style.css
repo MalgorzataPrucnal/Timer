@@ -7,6 +7,11 @@
     gap: 70px;
 }
 
+p:hover {
+    cursor: pointer;
+
+}
+
 .btn {
     display: flex;
     justify-items: center;
@@ -22,4 +27,11 @@
 
 .arrow_up::after {
     content: "\25B2"
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-content: center;
 }

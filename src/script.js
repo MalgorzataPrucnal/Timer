@@ -56,9 +56,11 @@ function reset(){
     nextBtn.disabled = true;
     pauseBtn.disabled = true;
     showClicked = false;
+    firebaseBtn.classList.add("hidden");
     stopBtn.classList.add("hidden");
     saveBtn.classList.add("hidden");
     document.querySelector(".listFromStorage").innerHTML = "";
+    placeForTimesFromFirebase.innerHTML = '';
 }
 
 //PLAY
@@ -107,18 +109,21 @@ saveBtn.classList.add("hidden");
 pauseBtn.addEventListener("click",  () => {   
 
     if (pauseClicked === false){
+        
         nextBtn.disabled = true;
         clearInterval(play);
         pauseClicked = true;
+        playBtn.disabled = false;
         
 }
 else if (pauseClicked === true) {
+    
     nextBtn.disabled = false;
     playWithouthReset();
     pauseClicked = false;
-    
+    playBtn.disabled = true;
 }
-playBtn.disabled = false;
+// playBtn.disabled = false;
 })
 
 //SAVE IN LOCAL STORAGE 
@@ -160,7 +165,8 @@ saveBtn.addEventListener("click", () => {
     //SAVE RESULTS IN FIREBASE (TOGETHER WITH LOCAL STORAGE)
         firebase.firestore().collection("times").add({
             nameSaved: keyName,
-            timesSaved: JSON.stringify(newArr[indexTobeChanged])
+            timeSaved: newTime
+            // timesSaved: JSON.stringify(newArr[indexTobeChanged])
             })
     }
     else {
@@ -168,21 +174,34 @@ saveBtn.addEventListener("click", () => {
     }
 });
 
-// SAVE IN FIREBASE - SEPARATE BUTTON
-// firebaseBtn.addEventListener ("click", () => {
+// SHOWS RESULTS SAVED IN FIREBASE - SEPARATE BUTTON
+let placeForTimesFromFirebase = document.querySelector(".listFromFirebase");
+firebaseBtn.addEventListener("click", () => {
 
-// firebase.firestore().collection("times").add({
-// nameSaved: keyName,
-// timesSaved: JSON.stringify(newArr[indexTobeChanged])
-// })
-// })
+    firebase.firestore().collection("times").get().then((times) => {
+        placeForTimesFromFirebase.innerHTML = '';
+        const list = document.createElement('ul');
+        let html = '';
+
+        times.forEach((person) => {
+            const resultsForPerson = person.data();
+            html += `<li>${resultsForPerson.nameSaved}: ${resultsForPerson.timeSaved}</li>`;
+
+        });
+
+        list.innerHTML = html;
+        placeForTimesFromFirebase.appendChild(list);
+
+    });
+});
 
 
 //SHOW RESULTS SAVED IN LOCAL STORAGE
+
 let showClicked = false;
 
 showSaved.addEventListener("click", () => {
-    // firebaseBtn.classList.remove("hidden");
+    firebaseBtn.classList.remove("hidden");
     let placeForTimesFromStorage = document.querySelector(".listFromStorage");
     let tableOfStoredValues = [];
     let names = [];
@@ -214,10 +233,10 @@ showSaved.addEventListener("click", () => {
             })
         })
         showClicked = true;
-        console.log(typeof(tableOfStoredValues) + tableOfStoredValues);
+        console.log(tableOfStoredValues);
 }})
 
-///NEXT - SHOW CURRENT RESULT AND CONTINUE GOING
+///NEXT - SHOW CURRENT RESULT AND KEEP GOING
 let placeForTimes = document.querySelector(".times");
 let counter = 0;
 nextBtn.disabled = true;

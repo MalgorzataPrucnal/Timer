@@ -53,38 +53,44 @@
         >
           Reset
         </button>
-
-        <button
-        class="buttonShow bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
-      >
-        Show saved
-      </button>
-      <button
-      class="firebase hidden bg-pink-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-xl font-sans font-bold text-yellow-200"
-    >
-      Send to database
-    </button>
+      
       </div>
       <section class="mt-12">
         <div>
         <h2 class="text-xl font-bold font-sans text-indigo-600">
-          Last results
+          Ostatnie wyniki
         </h2>
         <section class="times">
           <ul class="timesList">
           </ul>
         </section>
       </div>
-      <div>
-        <h2 class="text-xl font-bold font-sans text-indigo-600">
-          Saved results
-        </h2>
+      <div class="column">
+        <button
+        class="buttonShow bg-green-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-m font-sans text-yellow-200"
+      >
+        Show saved
+      </button>
       
       <section class="listFromStorage">
         <ul class="timesListFromStorage">
         </ul>
       </section>
     </div>
+
+    <div class="column">
+      <button
+      class="firebase hidden bg-green-800 hover:bg-pink-00 px-4 py-2 rounded mr-4 text-m font-sans text-yellow-200"
+    >
+      Show saved in database
+    </button>
+    
+    <section class="listFromFirebase">
+      <ul class="timesListFromFirebase">
+      </ul>
+    </section>
+    
+  </div>
   </section>
       </main>
 
