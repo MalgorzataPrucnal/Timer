@@ -10,7 +10,6 @@ const nextBtn = document.querySelector(".buttonNext");
 const showSaved = document.querySelector(".buttonShow");
 const firebaseBtn = document.querySelector(".firebase")
 
-
 let play;
 let timeZero;
 let timePassed = 0;
@@ -53,7 +52,6 @@ function reset(){
     stopClicked = false;
     pauseClicked = false;
     playBtn.disabled = false;
-    nextBtn.disabled = true;
     pauseBtn.disabled = true;
     showClicked = false;
     firebaseBtn.classList.add("hidden");
@@ -61,7 +59,7 @@ function reset(){
     saveBtn.classList.add("hidden");
     document.querySelector(".listFromStorage").innerHTML = "";
     placeForTimesFromFirebase.innerHTML = '';
-}
+};
 
 //PLAY
 let playClicked;
@@ -98,7 +96,7 @@ stopBtn.addEventListener("click",  function stop() {
     stopClicked = true;
     nextBtn.disabled = true;
     playBtn.disabled=false;
-})
+});
 
 //PAUSE
 let pauseClicked = false;
@@ -148,8 +146,6 @@ saveBtn.addEventListener("click", () => {
             }
         }
 
-        console.log(uniqueArray);
-
         let newArr = [...emptyRows];
         let indexTobeChanged = uniqueArray.indexOf(keyName);
 
@@ -195,9 +191,7 @@ firebaseBtn.addEventListener("click", () => {
     });
 });
 
-
 //SHOW RESULTS SAVED IN LOCAL STORAGE
-
 let showClicked = false;
 
 showSaved.addEventListener("click", () => {
@@ -233,8 +227,7 @@ showSaved.addEventListener("click", () => {
             })
         })
         showClicked = true;
-        console.log(tableOfStoredValues);
-}})
+}});
 
 ///NEXT - SHOW CURRENT RESULT AND KEEP GOING
 let placeForTimes = document.querySelector(".times");
